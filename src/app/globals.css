@@ -1,26 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Freeman&family=Germania+One&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jomhuria&display=swap');
 @import "tailwindcss";
 
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+--color-dingley-600: #626F47;
+--bg-c-20: rgba(0, 0, 0, 0.2);
+--font-germania: 'Germania One', sans-serif;
+--font-freeman: 'Freeman', sans-serif;
+--font-jomhuria: 'Jomhuria', sans-serif;
+--bg-layar: linear-gradient(to bottom, #FF8282 0%, #BEE4D0 100%);
 }

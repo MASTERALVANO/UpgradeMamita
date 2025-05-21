@@ -1,0 +1,21 @@
+# Dockerfile.dev
+
+FROM node:18-alpine
+
+# Set workdir
+WORKDIR /app
+
+# Copy package.json dan package-lock.json
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy semua file project
+COPY . .
+
+# Expose port
+EXPOSE 3000
+
+# Jalankan Next.js development server
+CMD ["npm", "run", "dev"]
