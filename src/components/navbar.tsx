@@ -38,7 +38,7 @@ function Hamburger(){
           <ul className="flex flex-col items-start text-white mb-5 ml-2 ">
             <li><a className="font-freeman text-[32px] font-bold" href="#home">Home</a></li>
             <li><a className="font-freeman text-[32px] font-bold" href="#menu">Menu</a></li>
-            <li><a className="font-freeman text-[32px] font-bold" href="#">Contact</a></li>
+            <li><a className="font-freeman text-[32px] font-bold" href="#contact">Contact</a></li>
           </ul>
       </div>
     </>

@@ -1,0 +1,18 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model pesanan {
+  id         Int      @id @default(autoincrement())
+  nama       String
+  alamat     String
+  jumlah     Int
+  minuman    String
+  pembayaran String
+  createdAt  DateTime @default(now())
+}

@@ -1,69 +1,56 @@
-"use client";
-import React from "react";
-import "@/app/globals.css";
-import HTMLFlipBook from "react-pageflip";
-import Image from "next/image";
+'use client';
+import HTMLFlipBook from 'react-pageflip';
+import Image from 'next/image';
 
-function Book() {
+const pages = [
+  '/menupg2.svg',
+  '/menupg3.svg'
+];
+
+export default function MenuFlipbook() {
   return (
-    <div
-      className="flex justify-center items-center min-h-screen"
-      style={{ backgroundColor: "#F0BB78" }}
-    >
+   <div className="flex justify-center items-center py-16 px-4" id='menu'>
       <HTMLFlipBook
-        width={200}
-        height={277}
+        width={398}
+        height={551}
+        minWidth={398}
+        maxWidth={398}
+        minHeight={551}
+        maxHeight={551}
         size="fixed"
-        minWidth={200}
-        maxWidth={200}
-        minHeight={277}
-        maxHeight={277}
-        maxShadowOpacity={0.5}
-        showCover={true}
-        mobileScrollSupport={true}
-        className="flipbook shadow-xl rounded-lg"
+        drawShadow
+        showCover
+        flippingTime={700}
+        className="shadow-xl"
+        style={{ backgroundColor: 'transparent' }} // <== ini penting
         startPage={0}
-        drawShadow={true}
-        flippingTime={1000}
-        usePortrait={true}
+        usePortrait={false}
         startZIndex={0}
         autoSize={false}
+        maxShadowOpacity={0.5}
+        mobileScrollSupport={false}
         clickEventForward={true}
         useMouseEvents={true}
         swipeDistance={30}
         showPageCorners={true}
         disableFlipByClick={false}
-        style={{ width: 200, height: 277 }}
       >
-        {/* Page 1 - Cover */}
-        <div className="flex flex-col items-center justify-center w-full h-full bg-[#F0BB78]">
-          <h1 className="text-2xl font-bold text-white">Our Menu</h1>
-          <Image src="/logo.svg" alt="Menu Cover" width={150} height={150} />
-        </div>
-
-        {/* Page 2 */}
-        <div className="w-full h-full bg-[#F0BB78] flex items-center justify-center">
-          <Image src="/menupg2.svg" alt="Menu Page 2" width={180} height={260} />
-        </div>
-
-        {/* Page 3 */}
-        <div className="w-full h-full bg-[#F0BB78] flex items-center justify-center">
-          <Image src="/menupg3.svg" alt="Menu Page 3" width={180} height={260} />
-        </div>
-
-        {/* Page 4 - Optional closing */}
-        <div className="w-full h-full bg-[#F0BB78] flex items-center justify-center">
-          <span className="text-white">Thank you!</span>
-        </div>
+        {pages.map((src, index) => (
+          <div
+            key={index}
+            className="relative w-[398px] h-[551px] bg-transparent"
+          >
+            <Image
+              src={src}
+              alt={`Page ${index + 1}`}
+              width={398}
+              height={551}
+              className="object-cover"
+            />
+          </div>
+        ))}
       </HTMLFlipBook>
     </div>
-  );
-}
 
-export default function Menu() {
-  return (
-    <div className="bg-transparent flex ">
-      <Book />
-    </div>
-  )
+  );
 }
