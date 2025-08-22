@@ -30,7 +30,7 @@ const produkMinuman = [
     image: '/product (3).svg',
     title1: 'Ice Chocoblend',
     title2: 'With Oreo',
-    desc: 'Buah durian diblend dengan gula & susu, dengan topping potongan buah, whipped cream dan keju.'
+    desc: 'Bubuk coklat premium diblend dengan gula & susu, dengan topping potongan buah, whipped cream dan keju.'
   },
 ];
 
@@ -48,27 +48,27 @@ function Product({ onOrder }: { onOrder: () => void }) {
 
   return (
     <section className="flex items-center m-0 p-0">
-      <div className="w-full flex flex-col md:flex-row gap-12">
+      <div className="w-full max-w-full flex flex-col md:flex-row gap-6 md:gap-12">
         {/* LEFT: Gambar Smoothie */}
-        <div className="relative flex">
+        <div className="relative hidden md:block md:w-1/2">
           <Image
             src={produk.image}
             alt={`Smoothie ${imgIndex + 1}`}
             width={858}
             height={1080}
+            className="w-full h-auto"
           />
         </div>
         {/* RIGHT: Konten */}
-        <div className="w-full md:w-[600px] space-y-6 text-start">
+        <div className="w-full max-w-screen-sm md:w-1/2 space-y-6 text-start px-2 md:px-0 min-h-[420px] md:min-h-[540px] flex flex-col justify-center">
           <p className="text-lg font-semibold text-black-500">Smooth & Healthy</p>
-          <h2 className="text-[48px] font-extrabold leading-tight text-black">
+          <h2 className="text-[2rem] md:text-[48px] font-extrabold leading-tight text-black">
             {produk.title1} <br /> {produk.title2}
           </h2>
-
-          <p className="text-[18px] font-medium text-black-700 leading-relaxed">
+          <p className="text-[1rem] md:text-[18px] font-medium text-black-700 leading-relaxed">
             {produk.desc}
           </p>
-          <div className="flex gap-5 pt-4">
+          <div className="flex gap-4 md:gap-5 pt-4">
             <button className="bg-[#a6b860] hover:bg-[#95a452] text-white text-lg font-bold py-2 px-6 rounded-full shadow-md transition">
               15K
             </button>
@@ -84,6 +84,7 @@ function Product({ onOrder }: { onOrder: () => void }) {
     </section>
   );
 }
+
 function Pesan({
   isOpen,
   onClose,
@@ -92,7 +93,7 @@ function Pesan({
   onClose: () => void;
 }) {
   const [jumlah, setJumlah] = useState(0);
-  const [nama, setNama] = useState("");
+  const [nama_pelanggan, setNama] = useState("");
   const [alamat, setAlamat] = useState("");
   const [minuman, setMinuman] = useState("Strawberry Smoothies");
   const [pembayaran, setPembayaran] = useState("tunai");
@@ -105,7 +106,7 @@ function Pesan({
   const res = await fetch('/api/pesanan', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ nama, alamat, jumlah, minuman, pembayaran }),
+    body: JSON.stringify({ nama_pelanggan, alamat, jumlah, minuman, pembayaran }),
   });
 
   if (res.ok) {
@@ -155,6 +156,8 @@ function Pesan({
               <option value="Avocado Smoothies">Avocado Smoothies</option>
               <option value="Mango Thai">Mango Thai</option>
               <option value="Ice Chocoblend With Oreo">Ice Chocoblend With Oreo</option>
+              <option value="Ice Durian">Ice Durian</option>
+              <option value="Matcha">Matcha</option>
             </select>
           </div>
 
@@ -162,7 +165,7 @@ function Pesan({
             <label className="block text-sm font-medium mb-1">Nama</label>
             <input
               type="text"
-              value={nama}
+              value={nama_pelanggan}
               onChange={(e) => setNama(e.target.value)}
               placeholder="Masukkan nama"
               className="w-full border rounded p-2"
@@ -241,44 +244,46 @@ function Pesan({
 // Deskripsi
 function Description() {
   return (
-    <section className="px-4 py-10 md:px-16 font-sans">
-      <h1 className="text-[40px] font-extrabold text-[#4d5735] mb-4 font-jomhuria">
-        Mamita Jepun — <span className="text-[#4d5735]">Smoothies Lokal, Rasa Juara!</span>
+    <section className="px-4 py-10 md:px-16 font-sans" id="about">
+      <h1 className="text-[40px] md:text-[52px] font-extrabold text-[#4d5735] mb-4 font-jomhuria drop-shadow-lg">
+        Mamita Jepun — <span className="text-[#a6b860]">Smoothies Lokal, Rasa Juara!</span>
       </h1>
       <div className="mt-6 flex flex-col lg:flex-row gap-6">
         {/* Kotak Hijau */}
-        <div className="bg-[#c3d86e] rounded-[32px] p-5 text-[#333] shadow-lg max-w-[797px] max-h-[485px] leading-relaxed text-base md:text-lg font-extrabold font-germania">
+        <div className="bg-[#c3d86e] rounded-[32px] p-4 md:p-8 text-[#333] shadow-xl w-full min-h-[260px] md:min-h-[340px] max-w-full md:max-w-[797px] leading-relaxed text-sm md:text-base font-extrabold font-germania flex flex-col justify-center">
+          <p className="text-white font-extrabold font-germania text-base md:text-lg mb-2">
+            Selamat datang di Mamita Jepun!
+          </p>
           <p>
-            <span className="text-white font-extrabold font-germania">Selamat datang di Mamita Jepun —</span> tempat terbaik untuk menikmati smoothies segar, creamy, dan penuh topping yang bikin nagih!
+            <span className="font-bold text-[#4d5735]">Tempat terbaik untuk menikmati smoothies segar, creamy, dan penuh topping yang bikin nagih!</span>
           </p>
           <br />
           <p>
-            Berawal dari dorongan keluarga dan semangat menciptakan cita rasa yang berbeda, Mamita hadir dengan berbagai pilihan minuman yang dibuat dari buah-buahan segar pilihan. Mulai dari Mango Thai yang juicy, Strawberry Smoothies yang seger, sampai Avocado dan Ice Durian yang legit, semuanya diracik dengan cinta dan topping khas Mamita yang melimpah.
+            <span className="font-bold text-[#a6b860]">Mamita</span> lahir dari semangat keluarga dan cinta pada rasa otentik. Kami hadir dengan pilihan minuman dari buah-buahan segar pilihan, diracik dengan topping khas yang melimpah. Nikmati <span className="text-[#f9c283] font-bold">Mango Thai</span> yang juicy, <span className="text-[#f36c6c] font-bold">Strawberry Smoothies</span> yang seger, <span className="text-[#a6b860] font-bold">Avocado</span> dan <span className="text-[#f9c283] font-bold">Ice Durian</span> yang legit — semua dibuat dengan cinta, untuk kamu!
           </p>
         </div>
         <div className="flex flex-col">
-          <div className="bg-[#f9c283] rounded-[20px] p-5 text-[#333] shadow-lg w-full max-h-[252px] leading-relaxed text-base md:text-lg font-normal font-sans">
-            <h2 className="text-[32px] font-extrabold text-[#4d5735] mb-3 font-jomhuria">
+          <div className="bg-[#f9c283] rounded-[20px] p-4 md:p-8 text-[#333] shadow-lg w-full min-h-[220px] md:min-h-[300px] leading-relaxed text-sm md:text-base font-normal font-sans flex flex-col justify-center">
+            <h2 className="text-[24px] md:text-[32px] font-extrabold text-[#4d5735] mb-3 font-jomhuria drop-shadow">
               Kenapa Harus <span className="text-[#a0c36e]">Mamita Jepun</span><span className="text-[#cce3ec]">?</span>
             </h2>
-            <ul className="space-y-2 text-[base] md:text-base font-extrabold font-freeman">
-              <li className="flex items-start gap-2"><FaCheckSquare className="text-green-600 mt-1" /> Rasa otentik buah segar</li>
-              <li className="flex items-start gap-2"><FaCheckSquare className="text-green-600 mt-1" /> Topping & whipped cream khas Mamita</li>
-              <li className="flex items-start gap-2"><FaCheckSquare className="text-green-600 mt-1" /> Proses higienis, cepat, dan berkualitas</li>
-              <li className="flex items-start gap-2"><FaCheckSquare className="text-green-600 mt-1" /> Selalu hadir di media sosial kamu lewat TikTok & IG</li>
-              <li className="flex items-start gap-2"><FaCheckSquare className="text-green-600 mt-1" /> Cocok buat semua usia, dari anak-anak sampai lansia</li>
+            <ul className="space-y-2 text-sm md:text-base font-extrabold font-freeman">
+              <li className="flex items-start gap-2"><FaCheckSquare className="text-green-600 mt-1" /> Rasa otentik buah segar, langsung dari petani lokal</li>
+              <li className="flex items-start gap-2"><FaCheckSquare className="text-green-600 mt-1" /> Topping & whipped cream khas Mamita, super melimpah</li>
+              <li className="flex items-start gap-2"><FaCheckSquare className="text-green-600 mt-1" /> Proses higienis, cepat, dan selalu fresh</li>
+              <li className="flex items-start gap-2"><FaCheckSquare className="text-green-600 mt-1" /> Hits di TikTok & IG, selalu update menu baru</li>
+              <li className="flex items-start gap-2"><FaCheckSquare className="text-green-600 mt-1" /> Cocok untuk semua usia, dari anak-anak sampai lansia</li>
             </ul>
           </div>
           <p className="mt-6 text-base md:text-lg font-semibold text-[#4d5735] w-full md:w-[65%] font-sans">
-            Diproduksi langsung oleh tangan-tangan terpercaya, semua minuman disiapkan hanya dalam waktu <br />
-            <span className="text-lg md:text-xl font-extrabold">5–6 menit</span> dengan standar kebersihan terbaik.
+            Semua minuman kami dibuat langsung oleh tangan-tangan terpercaya, disiapkan hanya dalam waktu <span className="text-lg md:text-xl font-extrabold">5–6 menit</span> dengan standar kebersihan terbaik. <span className="text-[#a6b860] font-bold">Rasakan bedanya, hanya di Mamita Jepun!</span>
           </p>
         </div>
       </div>
       <div className="mt-6 flex items-start gap-2 text-xs md:text-sm font-extrabold text-[#252525] font-freeman">
         <FaThumbtack className="text-red-600 mt-1" />
         <p>
-          Saat ini Mamita hadir di kota asalnya, namun ke depan, kami siap ekspansi ke Bandung & Ngunut — siapa tahu kota kamu jadi tujuan berikutnya?
+          Saat ini Mamita hadir di kota asalnya, dan siap ekspansi ke Bandung & Ngunut — siapa tahu kota kamu jadi tujuan berikutnya? <span className="text-[#a6b860]">Stay tuned!</span>
         </p>
       </div>
     </section>

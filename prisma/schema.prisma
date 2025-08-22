@@ -8,11 +8,13 @@ datasource db {
 }
 
 model pesanan {
-  id         Int      @id @default(autoincrement())
-  nama       String
-  alamat     String
-  jumlah     Int
-  minuman    String
-  pembayaran String
-  createdAt  DateTime @default(now())
+
+  id_psn              Int      @id @default(autoincrement())
+  nama_pelanggan      String
+  alamat              String
+  jumlah              Int
+  minuman             String
+  pembayaran          String
+  createdAt           DateTime @default(now())
+    
 }

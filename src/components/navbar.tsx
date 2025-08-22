@@ -3,9 +3,8 @@ import Image from "next/image";
 import React, { useState } from "react";
 import "@/app/globals.css";
 
-
-function Hamburger(){
- const [isOpen, setIsOpen] = useState(false);
+function Hamburger() {
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
@@ -32,14 +31,26 @@ function Hamburger(){
 
       {/* Transisi menu */}
       <div
-          className={`absolute top-0 right-0 mt-[36px] w-[240px] h-[258px] bg-[var(--color-dingley-600)] rounded-[30px] z-40 flex flex-col justify-end transition-all duration-500 ease-in-out 
-          ${isOpen ? "opacity-100 -translate-x-6" : "opacity-0 translate-x-full pointer-events-none"}`}
-        >
-          <ul className="flex flex-col items-start text-white mb-5 ml-2 ">
-            <li><a className="font-freeman text-[32px] font-bold" href="#home">Home</a></li>
-            <li><a className="font-freeman text-[32px] font-bold" href="#menu">Menu</a></li>
-            <li><a className="font-freeman text-[32px] font-bold" href="#contact">Contact</a></li>
-          </ul>
+        className={`fixed top-2 right-2 w-[240px] h-[258px] bg-[var(--color-dingley-600)] rounded-[30px] z-40 flex flex-col justify-end transition-all duration-500 ease-in-out
+          ${isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"}`}
+      >
+        <ul className="flex flex-col items-start text-white mb-5 ml-2 ">
+          <li>
+            <a className="font-freeman text-[32px] font-bold" href="#home">
+              Home
+            </a>
+          </li>
+          <li>
+            <a className="font-freeman text-[32px] font-bold" href="#menu">
+              Menu
+            </a>
+          </li>
+          <li>
+            <a className="font-freeman text-[32px] font-bold" href="#contact">
+              Contact
+            </a>
+          </li>
+        </ul>
       </div>
     </>
   );
@@ -47,9 +58,21 @@ function Hamburger(){
 
 export default function Navbar() {
   return (
-      <div className="flex items-center justify-between bg-transparent">
-          <Image src="/logo.svg" alt="NONE" width={281} height={161} />
-          <Hamburger />
+    <div
+      className="flex items-center justify-between w-full px-2 py-2"
+      style={{ background: "transparent" }}
+    >
+      <div className="flex-shrink-0">
+        <Image
+          src="/logo.svg"
+          alt="NONE"
+          width={200}
+          height={161}
+          className="w-[120px] h-auto md:w-[200px] transition-all duration-200"
+          priority
+        />
       </div>
+      <Hamburger />
+    </div>
   );
 }
